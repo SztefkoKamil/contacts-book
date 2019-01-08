@@ -8,31 +8,57 @@
     <title>Książka kontaktów</title>
 
     <link href="styles.css" type="text/css" rel="stylesheet">
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="container">
-      <div class="search-container">
-        <form class="search-form" action="">
-          <label for="name">IMIĘ</label>
-          <input type="text" id="name">
-          <label for="surname">NAZWISKO</label>
-          <input type="text" id="surname">
-          <label for="city">MIASTO</label>
-          <input type="text" id="city">
-          <label for="address">ADRES</label>
-          <input type="text" id="address">
-          <label for="zip">KOD POCZTOWY</label>
-          <input type="text" id="zip">
-          <label for="country">PAŃSTWO</label>
-          <input type="text" id="country">
-          <label for="phone">TELEFON</label>
-          <input type="text" id="phone">
-          <label for="email">E-MAIL</label>
-          <input type="text" id="email">
-        </form>
-        <button class="button-bar">
-          <span>SZUKAJ</span>
-        </button>
+      <div class="action-container">
+        <div class="form-container" id="form-container">
+          <form class="search-form shown" id="search-form">
+            <label for="name">IMIĘ</label>
+            <input type="text" id="name">
+            <label for="surname">NAZWISKO</label>
+            <input type="text" id="surname">
+            <label for="city">MIASTO</label>
+            <input type="text" id="city">
+            <label for="address">ADRES</label>
+            <input type="text" id="address">
+            <label for="zip">KOD POCZTOWY</label>
+            <input type="text" id="zip">
+            <label for="country">PAŃSTWO</label>
+            <input type="text" id="country">
+            <label for="phone">TELEFON</label>
+            <input type="text" id="phone">
+            <label for="email">E-MAIL</label>
+            <input type="text" id="email">
+          </form>
+          <form class="add-form" id="add-form">
+              <label for="name">IMIĘ</label>
+              <input type="text" id="name">
+              <label for="surname">NAZWISKO</label>
+              <input type="text" id="surname">
+              <label for="city">MIASTO</label>
+              <input type="text" id="city">
+              <label for="address">ADRES</label>
+              <input type="text" id="address">
+              <label for="zip">KOD POCZTOWY</label>
+              <input type="text" id="zip">
+              <label for="country">PAŃSTWO</label>
+              <input type="text" id="country">
+              <label for="phone">TELEFON</label>
+              <input type="text" id="phone">
+              <label for="email">E-MAIL</label>
+              <input type="text" id="email">
+              <label for="info">DODATKOWE INFORMACJE</label>
+              <textarea id="info" cols="30" rows="2"></textarea>
+            </form>
+        </div>
+        <div class="action-bar">
+          <button class="search-button" id="search-button">SZUKAJ</button>
+          <button class="open-button" id="open-button">OPEN</button>
+          <button class="add-button" id="add-button">DODAJ</button>
+        </div>
       </div>
       <div class="result-container" id="result-container"></div>
     </div>
