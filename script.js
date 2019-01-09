@@ -9,6 +9,7 @@ $(document).ready(() => {
   const formContainer = $('#form-container');
   const searchForm = $('#search-form');
   const addForm = $('#add-form');
+  const resultContainer = $('#result-container');
 
 
   getFullList();
@@ -89,6 +90,11 @@ $(document).ready(() => {
 
   function getFullList(){
     console.log('get full list');
+
+    $.get("php/getFullList.php", "null", (response) => {
+      console.log(JSON.parse(response));
+      showContacts(JSON.parse(response));
+    })
   }
 
   function searchContact(){
@@ -101,6 +107,26 @@ $(document).ready(() => {
 
   function deleteContact(){
     console.log('delete contact');
+  }
+
+
+  function showContacts(contacts){
+    let contact = '';
+
+    for(let i=0; i<contacts.length; i++){
+      contact = `<div class="contact">
+        <span>${contacts[i].name}</span>
+        <span>${contacts[i].surname}</span>
+        <span>${contacts[i].city}</span>
+        <span>${contacts[i].addres}</span>
+        <span>${contacts[i].zip_code}</span>
+        <span>${contacts[i].country}</span>
+        <span>${contacts[i].phone}</span>
+        <span>${contacts[i].email}</span>
+        <span>${contacts[i].info}</span></div>`;
+      resultContainer.append(contact);
+    }
+
   }
 
 })  // ----- main function ---------------------
