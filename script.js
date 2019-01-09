@@ -2,13 +2,27 @@ $(document).ready(() => {
   const searchBtn = $('#search-button');
   const openBtn = $('#open-button');
   const addBtn = $('#add-button');
+  const fullListBtn = $('#full-list-button');
+  const searchContactBtn = $('#search-contact-button');
+  const addContactBtn = $('#add-contact-button');
 
   const formContainer = $('#form-container');
   const searchForm = $('#search-form');
   const addForm = $('#add-form');
 
 
+  getFullList();
   actionBar();
+  
+  searchContactBtn.on('click', (event) => {
+    event.preventDefault()
+    searchContact();
+  });
+
+  addContactBtn.on('click', (event) => {
+    event.preventDefault()
+    addNewContact();
+  });
 
 
 // ===== FUNCTIONS DECLARATIONS =========================
@@ -56,7 +70,12 @@ $(document).ready(() => {
       }
     })  // ----- addBtn listener -------------
 
+    fullListBtn.on('click', () => {
+      getFullList();
+    });
+
   } // ----- actionBar function -----------
+
 
   function slideUpForm(){
     formContainer.slideUp(200, 'linear');
@@ -65,6 +84,23 @@ $(document).ready(() => {
   function slideDownForm(){
     formContainer.slideDown(200, 'linear');
     openBtn.addClass('open').text('HIDE');
+  }
+
+
+  function getFullList(){
+    console.log('get full list');
+  }
+
+  function searchContact(){
+    console.log('search contact');
+  }
+
+  function addNewContact(){
+    console.log('add new contact');
+  }
+
+  function deleteContact(){
+    console.log('delete contact');
   }
 
 })  // ----- main function ---------------------
