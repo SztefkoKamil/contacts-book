@@ -98,7 +98,32 @@ $(document).ready(() => {
   }
 
   function searchContact(){
-    console.log('search contact');
+    const sName = $('#s-name');
+    const sSurname = $('#s-surname');
+    const sCity = $('#s-city');
+    const sAddress = $('#s-address');
+    const sZip = $('#s-zip');
+    const sCountry = $('#s-country');
+    const sPhone = $('#s-phone');
+    const sEmail = $('#s-email');
+
+    const data = {
+      name: sName.val(),
+      surname: sSurname.val(),
+      city: sCity.val(),
+      address: sAddress.val(),
+      zip: sZip.val(),
+      country: sCountry.val(),
+      phone: sPhone.val(),
+      email: sEmail.val()
+    };
+    console.log(data);
+
+    $.post('php/searchContact.php', data, (response) => {
+      console.log(JSON.parse(response));
+      showContacts(JSON.parse(response));
+    })
+
   }
 
   function addNewContact(){
@@ -138,12 +163,14 @@ $(document).ready(() => {
   function showContacts(contacts){
     let contact = '';
 
+    resultContainer.empty();
+
     for(let i=0; i<contacts.length; i++){
       contact = `<div class="contact">
         <span>${contacts[i].name}</span>
         <span>${contacts[i].surname}</span>
         <span>${contacts[i].city}</span>
-        <span>${contacts[i].addres}</span>
+        <span>${contacts[i].address}</span>
         <span>${contacts[i].zip_code}</span>
         <span>${contacts[i].country}</span>
         <span>${contacts[i].phone}</span>
