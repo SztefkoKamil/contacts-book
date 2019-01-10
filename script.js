@@ -102,7 +102,32 @@ $(document).ready(() => {
   }
 
   function addNewContact(){
-    console.log('add new contact');
+    const aName = $('#a-name');
+    const aSurname = $('#a-surname');
+    const aCity = $('#a-city');
+    const aAddress = $('#a-address');
+    const aZip = $('#a-zip');
+    const aCountry = $('#a-country');
+    const aPhone = $('#a-phone');
+    const aEmail = $('#a-email');
+    const aInfo = $('#a-info');
+
+    const data = {
+      name: aName.val(),
+      surname: aSurname.val(),
+      city: aCity.val(),
+      address: aAddress.val(),
+      zip: aZip.val(),
+      country: aCountry.val(),
+      phone: aPhone.val(),
+      email: aEmail.val(),
+      info: aInfo.val()
+    };
+    console.log(data);
+
+    $.post('php/addContact.php', data, (response) => {
+      console.log(response);
+    })
   }
 
   function deleteContact(){

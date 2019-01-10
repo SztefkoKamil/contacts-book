@@ -1,6 +1,6 @@
 <?php
 
-  require_once "connect.php";
+  require_once "db_connect.php";
 
   $connection = mysqli_connect($host, $db_user, $db_password, $db_name);
   $response = mysqli_query($connection, "SELECT * FROM contacts");
