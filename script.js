@@ -184,15 +184,21 @@ $(document).ready(() => {
   } // ----- addNewContact function ---------------
 
   function editContact(){
-    let data = getFormData();
+    const data = getFormData();
     data.id = contactId;
     $.post('php/updateContact.php', data, (response) => {
       console.log(response);
     })
   } // ----- editContact function ---------------------
 
-  function deleteContact(){
-    console.log('delete contact');
+  function deleteContact(data){
+    const confirmed = confirm(`Czy napewno chcesz usunąć kontakt ${data.name} ${data.surname}?`);
+
+    if(confirmed){
+      $.post('php/deleteContact.php', data, (response) => {
+        console.log(response);
+      })
+    }
   }
 
 
@@ -216,7 +222,7 @@ $(document).ready(() => {
         </div>
         <div class="contact-options">
           <button class="edit-button">EDYTUJ</button>
-          <button>USUŃ</button>
+          <button class="delete-button">USUŃ</button>
         </div></div>`
       resultContainer.append(contact);
     }
@@ -227,12 +233,10 @@ $(document).ready(() => {
 
   function getButtons(){
     editBtn = $('.edit-button');
-    // deleteBtn = $('.delete-button');
-    // console.log($('.edit-button'));
+    deleteBtn = $('.delete-button');
 
     editBtn.on('click', function(){ // =======================
       contactId = this.parentNode.parentNode.getAttribute('data-id');
-      console.log(fetchedContacts);
 
       showEditForm();
 
@@ -250,6 +254,21 @@ $(document).ready(() => {
         }
       }
     }); // ----- editBtn listener ---------------
-  }
+
+    deleteBtn.on('click', function(){
+      contactId = this.parentNode.parentNode.getAttribute('data-id');
+      const contactData = { id: contactId};
+
+      for(let i of fetchedContacts){
+        if(i.id == contactId){
+          contactData.name = i.name;
+          contactData.surname = i.surname; 
+        }
+      }
+
+      deleteContact(contactData);
+    }); // ----- deleteBtn listener -----------
+
+  } // ----- getButtons function --------------
 
 })  // ----- main function ---------------------

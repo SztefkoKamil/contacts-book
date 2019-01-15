@@ -12,7 +12,7 @@
     echo "update contact success";
   }
   else if(!$response){
-    echo "update contact error<br>".$query;
+    echo "update contact error";
   }
 
   mysqli_close($connection);
