@@ -133,7 +133,7 @@ $(document).ready(() => {
     $.get("php/getFullList.php", "null", (response) => {
       fetchedContacts = JSON.parse(response);
       showContacts(fetchedContacts);
-      console.log(fetchedContacts);
+      // console.log(fetchedContacts);
     })
   } // ----- getFullList function --------------
 
@@ -204,7 +204,17 @@ $(document).ready(() => {
 
   function showContacts(contacts){  // =================
     let contact = '';
+    
+    contacts.sort((a, b) => {
+      let x = a.surname.toLowerCase();
+      let y = b.surname.toLowerCase();
+      if(x < y){ return -1; }
+      if(x > y){ return 1; }
+      return  0;
+    });
 
+    // console.log(contacts);
+    
     resultContainer.empty();
 
     for(let i=0; i<contacts.length; i++){
