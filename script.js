@@ -23,6 +23,9 @@ $(document).ready(() => {
   const form = $('#form');
   const resultContainer = $('#result-container');
 
+  let fetchedContacts = null;
+  let contactId = null;
+
 
   getFullList();
 
@@ -31,20 +34,13 @@ $(document).ready(() => {
 
 // ===== FUNCTIONS DECLARATIONS =========================
 
-  function actionBar(){
+  function actionBar(){ // ============================
     formInfo.hide();
     formInfoLabel.hide();
 
     searchBtn.on('click', () => {
-      form.removeClass('add').removeClass('edit').addClass('search');
-      formInfo.hide();
-      formInfoLabel.hide();
-
-      formBtn.text('ZNAJDŹ KONTAKT');
-
-      if(!openBtn.hasClass('open')){
-        slideDownForm();
-      }
+      clearForm();
+      showSearchForm();
     })  // ----- searchBtn listener ----------
 
     openBtn.on('click', () => {
@@ -57,20 +53,16 @@ $(document).ready(() => {
     })  // ----- openBtn listener ---------
 
     addBtn.on('click', () => {
-      form.removeClass('search').removeClass('edit').addClass('add');
-      formInfo.show();
-      formInfoLabel.show();
-
-      formBtn.text('DODAJ KONTAKT');
-
-      if(!openBtn.hasClass('open')){
-        slideDownForm();
-      }
+      clearForm();
+      showAddNewForm();
     })  // ----- addBtn listener -------------
 
     fullListBtn.on('click', () => {
+      slideUpForm();
+      clearForm();
       getFullList();
-    });
+
+    }); // ----- fullListBtn listener -----------
 
 
     formBtn.on('click', (event) => {
@@ -83,11 +75,48 @@ $(document).ready(() => {
         addNewContact();
       }
       else if(form.hasClass('edit')){
-        // editContact();
+        editContact();
       }
     }); // ----- formBtn listener ----------
 
-  } // ----- actionBar function -----------
+  } // ----- actionBar function ---------------------------------------
+
+
+  function showSearchForm(){
+    form.removeClass('add').removeClass('edit').addClass('search');
+    formInfo.hide();
+    formInfoLabel.hide();
+
+    formBtn.text('ZNAJDŹ KONTAKT');
+
+    if(!openBtn.hasClass('open')){
+      slideDownForm();
+    }
+  } // ----- showSearchForm function ---------------
+
+  function showAddNewForm(){
+    form.removeClass('search').removeClass('edit').addClass('add');
+    formInfo.show();
+    formInfoLabel.show();
+
+    formBtn.text('DODAJ KONTAKT');
+
+    if(!openBtn.hasClass('open')){
+      slideDownForm();
+    }
+  } // ----- showAddNewForm function ---------------
+
+  function showEditForm(){
+    form.removeClass('search').removeClass('add').addClass('edit');
+    formInfo.show();
+    formInfoLabel.show();
+
+    formBtn.text('ZAPISZ ZMIANY');
+
+    if(!openBtn.hasClass('open')){
+      slideDownForm();
+    }
+  } // ----- showEditForm function ---------------
 
 
   function slideUpForm(){
@@ -97,17 +126,17 @@ $(document).ready(() => {
   function slideDownForm(){
     formContainer.slideDown(200, 'linear');
     openBtn.addClass('open').text('HIDE');
-  }
+  } // ----- slide Up/Down form functions ---------
 
 
   function getFullList(){
-    console.log('get full list');
-
     $.get("php/getFullList.php", "null", (response) => {
-      console.log(JSON.parse(response));
-      showContacts(JSON.parse(response));
+      fetchedContacts = JSON.parse(response);
+      showContacts(fetchedContacts);
+      console.log(fetchedContacts);
     })
   } // ----- getFullList function --------------
+
 
   function getFormData(){
     const data = {
@@ -126,10 +155,23 @@ $(document).ready(() => {
 
   } // ----- getFormData function ----------------
 
+  function clearForm(){
+    formName.val(''),
+    formSurname.val(''),
+    formCity.val(''),
+    formAddress.val(''),
+    formZip.val(''),
+    formCountry.val(''),
+    formPhone.val(''),
+    formEmail.val(''),
+    formInfo.val('')
+  } // ----- clearForm function ------------------
+
   function searchContact(){
     $.post('php/searchContact.php', getFormData(), (response) => {
-      console.log(JSON.parse(response));
-      showContacts(JSON.parse(response));
+      fetchedContacts = JSON.parse(response);
+      showContacts(fetchedContacts);
+      console.log(fetchedContacts);
     })
 
   } // ----- searchContact function --------------
@@ -142,15 +184,19 @@ $(document).ready(() => {
   } // ----- addNewContact function ---------------
 
   function editContact(){
-    console.log('edit contact');
-  }
+    let data = getFormData();
+    data.id = contactId;
+    $.post('php/updateContact.php', data, (response) => {
+      console.log(response);
+    })
+  } // ----- editContact function ---------------------
 
   function deleteContact(){
     console.log('delete contact');
   }
 
 
-  function showContacts(contacts){
+  function showContacts(contacts){  // =================
     let contact = '';
 
     resultContainer.empty();
@@ -182,10 +228,28 @@ $(document).ready(() => {
   function getButtons(){
     editBtn = $('.edit-button');
     // deleteBtn = $('.delete-button');
-    console.log($('.edit-button'));
-    editBtn.on('click', function(){
-      console.log(this.parentNode.parentNode.getAttribute('data-id'));
-    });
+    // console.log($('.edit-button'));
+
+    editBtn.on('click', function(){ // =======================
+      contactId = this.parentNode.parentNode.getAttribute('data-id');
+      console.log(fetchedContacts);
+
+      showEditForm();
+
+      for(let i of fetchedContacts){
+        if(i.id == contactId){
+          formName.val(i.name),
+          formSurname.val(i.surname),
+          formCity.val(i.city),
+          formAddress.val(i.address),
+          formZip.val(i.zip_code),
+          formCountry.val(i.country),
+          formPhone.val(i.phone),
+          formEmail.val(i.email),
+          formInfo.val(i.info)
+        }
+      }
+    }); // ----- editBtn listener ---------------
   }
 
 })  // ----- main function ---------------------
