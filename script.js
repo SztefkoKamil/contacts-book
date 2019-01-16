@@ -121,11 +121,11 @@ $(document).ready(() => {
 
   function slideUpForm(){
     formContainer.slideUp(200, 'linear');
-    openBtn.removeClass('open').text('OPEN');
+    openBtn.removeClass('open').text('OTWÓRZ PANEL');
   }
   function slideDownForm(){
     formContainer.slideDown(200, 'linear');
-    openBtn.addClass('open').text('HIDE');
+    openBtn.addClass('open').text('ZAMKNIJ PANEL');
   } // ----- slide Up/Down form functions ---------
 
 
@@ -220,15 +220,15 @@ $(document).ready(() => {
     for(let i=0; i<contacts.length; i++){
       contact = `<div class="contact" data-id="${contacts[i].id}">
         <div class="contact-info">
-          <span>${contacts[i].name}</span>
-          <span>${contacts[i].surname}</span>
-          <span>${contacts[i].city}</span>
-          <span>${contacts[i].address}</span>
-          <span>${contacts[i].zip_code}</span>
-          <span>${contacts[i].country}</span>
-          <span>${contacts[i].phone}</span>
-          <span>${contacts[i].email}</span>
-          <span>${contacts[i].info}</span>
+          <span class="i-name">${contacts[i].surname}</span>
+          <span class="i-surname">${contacts[i].name}</span>
+          <span class="i-city">${contacts[i].city}</span>
+          <span class="i-address">${contacts[i].address}</span>
+          <span class="i-zip">${contacts[i].zip_code}</span>
+          <span class="i-country">${contacts[i].country}</span>
+          <span class="i-phone">${contacts[i].phone}</span>
+          <span class="i-email">${contacts[i].email}</span>
+          <span class="i-info">${contacts[i].info}</span>
         </div>
         <div class="contact-options">
           <button class="edit-button">EDYTUJ</button>

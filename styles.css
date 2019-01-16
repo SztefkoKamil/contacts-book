@@ -15,6 +15,10 @@ body{
   flex-direction: column;
   align-items: center;
 }
+.container button{
+  padding: 5px 10px;
+  cursor: pointer;
+}
 
 /* ---- SEARCH CONTAINER ---- */
 
@@ -22,46 +26,126 @@ body{
   width: 960px;
   min-height: 10px;
   background: #ddd;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  box-shadow: 4px 4px 20px 1px gray;
 }
 
 
 .form-container{
   width: inherit;
-  height: 400px;
+  min-height: 10px;
   display: none;
   overflow: hidden;
 }
 .form{
   width: inherit;
-  background: #ddd;
+  background: lightblue;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 20px;
+  justify-items: center;
+}
+.name-label{
+  grid-column: 1;
+  grid-row: 1;
+}
+.name{
+  grid-column: 1;
+  grid-row: 2;
+}
+.surname-label{
+  grid-column: 2;
+  grid-row: 1;
+}
+.surname{
+  grid-column: 2;
+  grid-row: 2;
+}
+.city-label{
+  grid-column: 3;
+  grid-row: 1;
+}
+.city{
+  grid-column: 3;
+  grid-row: 2;
+}
+.address-label{
+  grid-column: 4;
+  grid-row: 1;
+}
+.address{
+  grid-column: 4;
+  grid-row: 2;
+}
+.zip-label{
+  grid-column: 1;
+  grid-row: 3;
+}
+.zip{
+  grid-column: 1;
+  grid-row: 4;
+}
+.country-label{
+  grid-column: 2;
+  grid-row: 3;
+}
+.country{
+  grid-column: 2;
+  grid-row: 4;
+}
+.phone-label{
+  grid-column: 3;
+  grid-row: 3;
+}
+.phone{
+  grid-column: 3;
+  grid-row: 4;
+}
+.email-label{
+  grid-column: 4;
+  grid-row: 3;
+}
+.email{
+  grid-column: 4;
+  grid-row: 4;
+}
+.info-label{
+  grid-column: 2/4;
+  grid-row: 5;
+}
+.info{
+  grid-column: 1/5;
+  grid-row: 6/8;
+  width: 800px;
+  height: 70px;
+  padding: 5px;
+  line-height: 140%;
 }
 .form-button{
-  margin: 10px;
+  grid-column: 2/4;
+  grid-row: 9;
+}
+.gap-up{
+  margin-top: 20px;
+}
+.form input{
+  padding: 3px 5px;
+  text-align: center;
 }
 
 
 .action-bar{
   width: 100%;
-  background: lightblue;
+  background: skyblue;
   padding: 20px;
   display: flex;
   justify-content: center;
 }
 .search-button{
-  cursor: pointer;
-  color: red;
-}
-.open-button{
   margin: 0 15px;
 }
 .add-button{
-  cursor: pointer;
-  color: green;
   margin-right: 15px;
 }
 
@@ -69,20 +153,80 @@ body{
 
 .result-container{
   width: 960px;
-  background: #ddd;
 }
 
 .contact{
-  background: #fff;
-  padding: 20px;
-  margin-bottom: 10px;
+  background: #fafafa;
+  margin-bottom: 15px;
   display: flex;
+  box-shadow: 4px 4px 20px 1px gray;
 }
 
 .contact:last-child{
   margin-bottom: 0px;
 }
 
+.contact-info{
+  width: 860px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 10px;
+  grid-row-gap: 10px;
+  grid-column-gap: 4px;
+}
+.i-name{
+  grid-column: 1;
+  grid-row: 1;
+}
+.i-surname{
+  grid-column: 2;
+  grid-row: 1;
+}
+.i-city{
+  grid-column: 3;
+  grid-row: 1;
+}
+.i-address{
+  grid-column: 4;
+  grid-row: 1;
+}
+.i-zip{
+  grid-column: 5;
+  grid-row: 1;
+}
+.i-country{
+  grid-column: 6;
+  grid-row: 1;
+}
+.i-phone{
+  grid-column: 2/4;
+  grid-row: 2;
+}
+.i-email{
+  grid-column: 4/6;
+  grid-row: 2;
+}
+.i-info{
+  grid-column: 1/7;
+  line-height: 140%;
+}
 .contact-info span{
-  margin: 5px 15px;
+  text-align: center;
+  background: #c3f7bb;
+  padding: 3px;
+}
+
+.contact-options{
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.edit-button{
+  color: green;
+}
+.delete-button{
+  color: red;
 }
