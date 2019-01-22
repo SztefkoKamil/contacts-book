@@ -133,7 +133,6 @@ $(document).ready(() => {
     $.get("php/getFullList.php", "null", (response) => {
       fetchedContacts = JSON.parse(response);
       showContacts(fetchedContacts);
-      // console.log(fetchedContacts);
     })
   } // ----- getFullList function --------------
 
@@ -171,7 +170,6 @@ $(document).ready(() => {
     $.post('php/searchContact.php', getFormData(), (response) => {
       fetchedContacts = JSON.parse(response);
       showContacts(fetchedContacts);
-      console.log(fetchedContacts);
     })
 
   } // ----- searchContact function --------------
@@ -179,6 +177,8 @@ $(document).ready(() => {
   function addNewContact(){
     $.post('php/addContact.php', getFormData(), (response) => {
       console.log(response);
+      getFullList();
+      clearForm();
     })
 
   } // ----- addNewContact function ---------------
@@ -188,6 +188,7 @@ $(document).ready(() => {
     data.id = contactId;
     $.post('php/updateContact.php', data, (response) => {
       console.log(response);
+      getFullList();
     })
   } // ----- editContact function ---------------------
 
@@ -212,8 +213,6 @@ $(document).ready(() => {
       if(x > y){ return 1; }
       return  0;
     });
-
-    // console.log(contacts);
     
     resultContainer.empty();
 

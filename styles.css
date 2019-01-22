@@ -211,6 +211,7 @@ body{
   line-height: 140%;
 }
 .contact-info span{
+  min-height: 24px;
   text-align: center;
   background: #c3f7bb;
   padding: 3px;
