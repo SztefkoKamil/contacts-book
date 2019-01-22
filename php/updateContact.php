@@ -9,10 +9,10 @@
   $response = mysqli_query($connection, $query);
 
   if($response){
-    echo "update contact success";
+    echo "Zaktualizowano kontakt.";
   }
   else if(!$response){
-    echo "update contact error";
+    echo "Błąd, spróbuj ponownie.";
   }
 
   mysqli_close($connection);

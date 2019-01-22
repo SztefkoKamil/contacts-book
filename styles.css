@@ -140,8 +140,17 @@ body{
   background: skyblue;
   padding: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
+
+.action-bar>span{
+  width: 200px;
+  line-height: 29px;
+}
+.action-response{
+  text-align: right;
+}
+
 .search-button{
   margin: 0 15px;
 }

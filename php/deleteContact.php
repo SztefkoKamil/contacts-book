@@ -9,10 +9,10 @@
   $response = mysqli_query($connection, $query);
 
   if($response){
-    echo "delete contact success";
+    echo "Usunięto kontakt";
   }
   else if(!$response){
-    echo "delete contact error";
+    echo "Błąd, spróbuj ponownie.";
   }
 
   mysqli_close($connection);

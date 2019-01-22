@@ -4,6 +4,8 @@ $(document).ready(() => {
   const addBtn = $('#add-button');
   const fullListBtn = $('#full-list-button');
   const formBtn = $('#form-button');
+  const counter = $('#counter');
+  const actionResponse = $('#action-response');
 
   const formName = $('#name');
   const formSurname = $('#surname');
@@ -24,6 +26,8 @@ $(document).ready(() => {
   const resultContainer = $('#result-container');
 
   let fetchedContacts = null;
+  let contactsCounter = null;
+  let responseTimeout = null;
   let contactId = null;
 
 
@@ -177,6 +181,7 @@ $(document).ready(() => {
   function addNewContact(){
     $.post('php/addContact.php', getFormData(), (response) => {
       console.log(response);
+      showResponse(response);
       getFullList();
       clearForm();
     })
@@ -188,6 +193,7 @@ $(document).ready(() => {
     data.id = contactId;
     $.post('php/updateContact.php', data, (response) => {
       console.log(response);
+      showResponse(response);
       getFullList();
     })
   } // ----- editContact function ---------------------
@@ -198,12 +204,26 @@ $(document).ready(() => {
     if(confirmed){
       $.post('php/deleteContact.php', data, (response) => {
         console.log(response);
+        showResponse(response);
+        getFullList();
       })
     }
+  } // ----- deleteContact function ---------------------
+
+
+  function showResponse(resp){
+    clearTimeout(responseTimeout);
+    actionResponse.text(resp);
+    responseTimeout = setTimeout(() => {
+      actionResponse.empty();
+    }, 5000);
   }
 
 
   function showContacts(contacts){  // =================
+    contactsCounter = contacts.length;
+    counter.text(`${contactsCounter} kontaktów`);
+
     let contact = '';
     
     contacts.sort((a, b) => {

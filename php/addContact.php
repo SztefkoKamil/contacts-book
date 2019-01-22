@@ -9,10 +9,10 @@
   $response = mysqli_query($connection, $query);
 
   if($response){
-    echo "add contact success";
+    echo "Dodano kontakt.";
   }
   else if(!$response){
-    echo "add contact error";
+    echo "Błąd, spróbuj ponownie.";
   }
 
   mysqli_close($connection);
