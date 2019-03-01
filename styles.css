@@ -7,7 +7,7 @@
 body{
   font-family: 'Arial';
   font-size: 16px;
-  background: lightgray;
+  background: radial-gradient(rgb(140, 201, 86), rgb(145, 193, 161));
 }
 
 .container{
@@ -181,7 +181,7 @@ body{
   grid-template-columns: repeat(6, 1fr);
   padding: 10px;
   grid-row-gap: 10px;
-  grid-column-gap: 4px;
+  background: #c3f7bb;
 }
 .i-name{
   grid-column: 1;
@@ -222,7 +222,7 @@ body{
 .contact-info span{
   min-height: 24px;
   text-align: center;
-  background: #c3f7bb;
+  background: #fff;
   padding: 3px;
 }
 
